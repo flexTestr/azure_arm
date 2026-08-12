@@ -1,0 +1,17 @@
+{
+  "$schema": "https://azure.com",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "storagePrefix": {
+      "value": "mydemostore"
+    },
+    "adminSecretPassword": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/YOUR-SUBSCRIPTION-ID/resourceGroups/YOUR-RESOURCE-GROUP/providers/Microsoft.KeyVault/vaults/YOUR-KEYVAULT-NAME"
+        },
+        "secretName": "MyDatabasePasswordOrSecret"
+      }
+    }
+  }
+}
