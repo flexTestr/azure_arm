@@ -1,0 +1,30 @@
+{
+  "$schema": "https://azure.com",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "storagePrefix": {
+      "type": "string"
+    },
+    "adminSecretPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "This secret is fetched dynamically from Key Vault during deployment."
+      }
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Storage/storageAccounts",
+      "apiVersion": "2023-01-01",
+      "name": "[substring(concat(toLower(parameters('storagePrefix')), uniqueString(resourceGroup().id)), 0, 24)]",
+      "location": "[resourceGroup().location]",
+      "sku": {
+        "name": "Standard_LRS"
+      },
+      "kind": "StorageV2",
+      "properties": {
+        "supportsHttpsTrafficOnly": true
+      }
+    }
+  ]
+}
